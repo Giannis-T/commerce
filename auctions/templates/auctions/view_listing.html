@@ -1,0 +1,77 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if message%}
+        {{ message }}
+        <br>You could take a look at all the
+        <a href="{% url 'index' %}">Active Listings</a>.
+    {% endif %}
+
+    {% if  winner %}
+        <div class="view-listing">
+            <h6>The winner of this bidding is <h5 style="margin-left:5px;">"{{winner}}"</h5></h6>
+        </div>
+    {% endif %}
+
+    
+    <div class="view-listing">
+        <div>
+            <h3>Listing:{{ listing.title }}</h3>
+            {% if in_watchlist %}
+                <a href="{% url 'remove_from_watchlist' listing.id %}" id="watchlist">Remove from watchlist</a>
+            {% else %}
+                <a href="{% url 'add_to_watchlist' listing.id %}" id="watchlist">Watchlist</a>
+            {% endif %} 
+            <br><img class="view-listing-image" src={{listing.image}}>
+            <div class="view-listing">
+                <br><br>{{ listing.description }}
+            </div>
+            <br> Category:{{ listing.category.title }}
+            <div style="height:30px;">
+                <br>Listed by {{ listing.user }}
+            </div>
+
+            <br>
+            <div class="view-listing">
+                <div>Current bid:</div><h4>${{ listing.cost }}</h4>
+            </div>
+        
+            <br id="br">
+            <div style="display:flex;">
+                
+                <form action="{% url 'place_bid' listing.id %}"  method="post">
+                    {% csrf_token %} 
+                    <input type="number" name="cost" min="{{ listing.cost }}" step="0.1" placeholder="${{ listing.cost }}">
+                    <input type="submit" class="submit-bid" value="Place Bid" >
+                </form>
+
+                {% if created_by_user %}
+                    <form action="{% url 'close_bid' listing.id %}"  method="post">
+                        {% csrf_token %}
+                        <input type="submit" id="close-bid" value="Close Bidding">
+                    </form>
+                {% endif %}
+            </div> 
+        </div>
+    </div>
+
+    <div>
+        <form action="{% url 'comment' listing.id%}" id="comment" method="post">
+            {% csrf_token %}
+            <div class="create-comment">
+                <div><textarea name="content" class="comment-textarea" placeholder="Comment" form="comment"></textarea></div>
+                <div><input type="submit" style="margin-left:10px;" value="Post"></div>
+            </div>
+        </form>
+    
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment">
+                    <br>{{ comment.content }}
+                </div>
+                
+                
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
