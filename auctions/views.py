@@ -140,10 +140,15 @@ def select_category(request):
         "listings" : Listing.objects.filter(category=category, is_active=True),
         "category" : category_title,
         })
-    categories = Category.objects.all()
-    return render(request, "auctions/select_category.html", {
-        "categories" : categories,
-    })
+    HttpResponse("There was an error returning specific category's listings")
+
+def view_all_categories(request):
+    if request.method == "GET":
+        categories = Category.objects.all()
+        return render(request, "auctions/select_category.html", {
+            "categories" : categories,
+        })
+    HttpResponse("There was an error tring to view all categories")
 
 def login_view(request):
     if request.method == "POST":

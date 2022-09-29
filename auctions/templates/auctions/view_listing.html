@@ -22,7 +22,7 @@
             {% else %}
                 <a href="{% url 'add_to_watchlist' listing.id %}" id="watchlist">Watchlist</a>
             {% endif %} 
-            <br><img class="view-listing-image" src={{listing.image}}>
+            <br><img class="view-listing-image" src={{listing.image.url}}>
             <div class="view-listing">
                 <br><br>{{ listing.description }}
             </div>
