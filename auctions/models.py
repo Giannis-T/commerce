@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
 
 
 class User(AbstractUser):
@@ -17,7 +18,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=64)
     description = models.TextField(max_length=128)
     cost = models.FloatField(default=0)
-    image = models.URLField(max_length=200, blank=True)
+    image = models.ImageField(upload_to=settings.MEDIA_ROOT, default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE) 
     time_created = models.DateTimeField(auto_now_add=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

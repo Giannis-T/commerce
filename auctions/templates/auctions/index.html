@@ -6,7 +6,7 @@
         <a href="{% url 'view_listing' listing.id %}">
             <div class="listing">
                 <div>
-                    <img class="listing-image" src= {{listing.image}}>
+                    <img class="listing-image" src= {{listing.image.url}}>
                 </div>
                 <div class="listing-text">
                     <b>{{listing.title}}</b>

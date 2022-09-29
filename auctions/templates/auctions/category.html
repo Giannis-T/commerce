@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "auctions/layout.html" %}
 {% block body %}
     Results of "{{ category }}" category.
@@ -5,7 +6,7 @@
         <a href="{% url 'view_listing' listing.id %}">
             <div class="listing">
                 <div>
-                    <img class="listing-image" src= {{listing.image}}>
+                    <img class="listing-image" src= {{listing.image.url}}>
                 </div>
                 <div class="listing-text">
                     <b>{{listing.title}}</b>
@@ -14,4 +15,22 @@
                 </div>    
             </div>
     {%endfor%}
+=======
+{% extends "auctions/layout.html" %}
+{% block body %}
+    Results of "{{ category }}" category.
+    {% for listing in listings%}
+        <a href="{% url 'view_listing' listing.id %}">
+            <div class="listing">
+                <div>
+                    <img class="listing-image" src= {{listing.image.url}}>
+                </div>
+                <div class="listing-text">
+                    <b>{{listing.title}}</b>
+                    <br><b>Price: $</b>{{listing.cost}}
+                    <br>Created at: {{listing.time_created}}
+                </div>    
+            </div>
+    {%endfor%}
+>>>>>>> listing-template
 {% endblock %}
