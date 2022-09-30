@@ -2,19 +2,20 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    {% if message%}
-        {{ message }}
-        <br>You could take a look at all the
-        <a href="{% url 'index' %}">Active Listings</a>.
-    {% endif %}
-
-    {% if  winner %}
-        <div class="view-listing">
-            <h6>The winner of this bidding is <h5 style="margin-left:5px;">"{{winner}}"</h5></h6>
-        </div>
-    {% endif %}
-
-=======
+    <table>
+        <tr>
+          <th>
+            {% if message%}
+                {{ message }}
+                <br>You could take a look at all the
+                <a href="{% url 'index' %}">Active Listings</a>.
+            {% endif %}
+          </th>
+          <th>
+            {% if  winner %}
+                <div class="view-listing">
+                    <h6>The winner of this bidding is <h5 style="margin-left:5px;">"{{winner}}"</h5></h6>
+                </div>
             {% endif %}
           </th> 
         </tr>
@@ -103,7 +104,4 @@
             </td>
         </tr>
     </table> 
-=======
-
->>>>>>> listing-template
 {% endblock %}
