@@ -27,8 +27,7 @@ def is_in_watchlist(user, listing):
     return False
 
 def get_winner(listing):
-    cost = listing.cost
-    bid = Bid.objects.get(listing=listing, cost=cost)
+    bid = Bid.objects.get(listing=listing)
     return bid.user
 
 @login_required(login_url='/login')
@@ -96,7 +95,6 @@ def create_listing(request):
             form.save()
             cost = form.cost
             listing = Listing.objects.get(id=form.id)
-            Bid.objects.create(cost=cost, user=request.user, listing=listing) 
             return HttpResponseRedirect(reverse("view_listing", args=[form.id],))
     return render(request, "auctions/create_listing.html",{
         "form":form,
@@ -142,6 +140,14 @@ def select_category(request):
         })
     HttpResponse("There was an error returning specific category's listings")
 
+def select_category_get(request, category_id):
+    if request.method == "GET":
+        requested_category = Category.objects.get(id=category_id)
+        return render(request, "auctions/category.html", {
+            "listings" : Listing.objects.filter(category = requested_category),
+            "category" : requested_category.title,
+        })
+    HttpResponse("This was supposed to be a GET request NOT POST")
 def view_all_categories(request):
     if request.method == "GET":
         categories = Category.objects.all()
