@@ -1,23 +1,53 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+
     <form action="{% url 'create_listing' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="create-listing">
-            <p>Title:<br>
-            {{ form.title }} 
-            <div style="margin-left:10px;">
-                Description:<br>
-                {{ form.description}}</p>
-            </div>
-        </div>
-        Bid in $:
-        <p>{{ form.cost }}</p>
-        Image:
-        <p>{{ form.image }}</p>
-        Category:
-        <p>{{ form.category }}</p>
-        
-        <input id= "create" type="submit" value="Create">
+        <table style= "margin-left:15px;">
+            <tr>
+                <th class="create-listing-td">
+                    <div>
+                        <h3>
+                            Listing Title
+                            {{ form.title }}
+                        </h3>
+                    </div>   
+                </th>
+            </tr>
+            <tr>
+                <td class="create-listing-td">
+                    <h3>Description</h3>
+                    {{ form.description}}     
+                </td>
+            </tr>
+            <tr>
+                <td class="create-listing-td">
+                    <h3>Listing Image</h3>
+                    {{ form.image }}
+                </td>
+            </tr>
+            <tr>
+                <td class="create-listing-td">
+                    <br><h3>Category</h3>
+                    {{ form.category }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="display:inline;">
+                        <h3>
+                            Initial Cost
+                            ${{ form.cost }}
+                        </h3>              
+                    </div>
+                </td>        
+            </tr>
+            <tr>
+                <td>
+                    <input id= "create" type="submit" value="Create">
+                </td>
+            </tr>
+        </table>
     </form>
 {% endblock %}
