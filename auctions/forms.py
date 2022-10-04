@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Listing, Category, User
+from .models import Listing
 
 class ListingForm(ModelForm):
     class Meta:

@@ -25,6 +25,7 @@
     order: 2;
     width: 461px;
     height: 306px;
+    margin-right: 10px;
 }
 .view-listing {
     display: flex;

@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <form action="{% url 'create_listing' %}" method="post">
+    <form action="{% url 'create_listing' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="create-listing">
             <p>Title:<br>
@@ -13,7 +13,7 @@
         </div>
         Bid in $:
         <p>{{ form.cost }}</p>
-        Image-URL:
+        Image:
         <p>{{ form.image }}</p>
         Category:
         <p>{{ form.category }}</p>

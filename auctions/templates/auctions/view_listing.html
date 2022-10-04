@@ -12,7 +12,10 @@
             {% endif %}
           </th>
           <th>
-            {% if  winner %}
+            {% if winner == user %}
+                <h3>CONGRATS! {{winner}}</h3>
+                <br><h5>You won this biding war!</h5>
+            {% elif  winner %}
                 <div class="view-listing">
                     <h6>The winner of this bidding is <h5 style="margin-left:5px;">"{{winner}}"</h5></h6>
                 </div>
@@ -21,7 +24,7 @@
         </tr>
 
         <tr>
-          <td><h3 style="padding-left: 15%;">Listing:{{ listing.title }}</h3></td>
+          <td><h3 style="padding-left: 15%;">{{ listing.title }}</h3></td>
         </tr>
 
         <tr>
@@ -53,7 +56,7 @@
                 <div>
                     <form action="{% url 'place_bid' listing.id %}"  method="post">
                         {% csrf_token %} 
-                        <input type="number" name="cost" min="{{ listing.cost }}" step="0.1" placeholder="${{ listing.cost }}">
+                        <input type="number" name="cost" min="{{listing.cost | add:1}}" step="0.1" placeholder="${{ listing.cost }}">
                         <input type="submit" class="submit-bid" value="Place Bid" >
                     </form>
                     <br>
@@ -69,14 +72,14 @@
 
         <tr>
             <td style="padding-top: 5%;">
-                <div style="padding-left:10%;">
+                <div >
                     <form action="{% url 'comment' listing.id%}" id="comment" method="post">
                         {% csrf_token %}
                         <div>
                             <textarea form="comment" name="content" class="comment-textarea" max-length=280 placeholder="Add a comment"></textarea>
                         </div>
                         <div>
-                            <input type="submit" style="margin-left:10px;" value="Comment">
+                            <input type="submit" style="margin-left:80%;" value="Comment">
                         </div>
                     </form>
                 </div>

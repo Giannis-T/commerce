@@ -27,8 +27,12 @@ def is_in_watchlist(user, listing):
     return False
 
 def get_winner(listing):
-    bid = Bid.objects.get(listing=listing)
-    return bid.user
+    try: 
+        bid = Bid.objects.get(listing=listing)
+        return bid.user 
+
+    except Bid.DoesNotExist: 
+        return listing.user
 
 @login_required(login_url='/login')
 def view_listing(request, listing_id):
@@ -45,6 +49,7 @@ def view_listing(request, listing_id):
             "created_by_user": user_is_creator(user, listing),
             "winner" : winner,
             "comments": Comment.objects.filter(listing_id=listing_id),
+            "user" : user,
             
         })
     return render(request, "auctions/view_listing.html", {
@@ -87,14 +92,12 @@ def remove_from_watchlist(request, listing_id):
 def create_listing(request):
     form = ListingForm()
     if request.method == "POST":
-        form = ListingForm(request.POST)
+        form = ListingForm(request.POST, request.FILES or None)
         if form.is_valid():
             form = form.save(commit=False)
             form.user = request.user
             form.is_active = True
             form.save()
-            cost = form.cost
-            listing = Listing.objects.get(id=form.id)
             return HttpResponseRedirect(reverse("view_listing", args=[form.id],))
     return render(request, "auctions/create_listing.html",{
         "form":form,
