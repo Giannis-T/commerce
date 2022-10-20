@@ -39,7 +39,7 @@ To create such an account you need to write the command
 python manage.py createsuperuser
 
 ```
-fill in the inputs and you have successfuly created an admin account!
+fill in the fields and you have successfuly created an admin account!
 
 To access the admin interface while running the application locally, type in the browser url page
 ```
