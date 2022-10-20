@@ -1,5 +1,13 @@
-# commerce
-This is a commerce web app with like, comment, bid, watchlist, register, login, logout, create/delete listing and end bidding capabilities. It is a project from Harvard edx Computer Science for Web Programming course.
+#Commerce site for bidding 
+
+A website that allows users to:
+* Create listings for their products
+* Add products in their watchlist
+* Bid on products
+* Make comments on the products.
+
+The users can **Register**, **Login** and **Logout** from the site. The website is implementing Django for the backend, and it utilizes Django Templates for the frontend.
+
 
 # Build process
 1. You should create a virtual environment in which you will install Django
