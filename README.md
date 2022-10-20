@@ -1,4 +1,4 @@
-#Commerce site for bidding 
+# Commerce site for bidding 
 
 A website that allows users to:
 * Create listings for their products
